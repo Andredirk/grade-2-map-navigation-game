@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grade 2 Map Navigation Game</title>
+    <meta
+      name="description"
+      content="A bright, tap-friendly map direction game for Grade 2 students."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23ffcf3f'/%3E%3Cpath d='M16 45V16l6-3 8 4 10-4 8 4v29l-8-4-10 4-8-4-6 3Z' fill='%234f8cff' stroke='%23173f61' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="game-app">
+      <section class="map-area" aria-label="Interactive town map">
+        <div class="title-row">
+          <div>
+            <p class="eyebrow">Map Mission</p>
+            <h1>Find the way</h1>
+          </div>
+          <div class="destination-pill" id="destination-count">
+            Destination 1 of 5
+          </div>
+        </div>
+
+        <div class="map-stage">
+          <img
+            src="./challenge-map.webp"
+            alt="A colorful town map with roads and places to visit."
+            draggable="false"
+          />
+
+          <svg
+            class="route-line"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polyline id="route-line" points=""></polyline>
+          </svg>
+
+          <div id="junction-layer" aria-hidden="true"></div>
+
+          <span class="start-badge" id="start-badge">START</span>
+          <span class="start-arrow icon-arrow-up" id="start-arrow" aria-hidden="true"></span>
+
+          <span class="target-pin" id="target-pin" aria-label="Destination">
+            <span class="icon-flag" aria-hidden="true"></span>
+            <span id="target-name">Library</span>
+          </span>
+
+          <span class="student-marker" id="student-marker" aria-label="Your marker">
+            <span class="icon-map-pin" aria-hidden="true"></span>
+            <span>You</span>
+            <span class="marker-arrow icon-arrow-up" id="marker-arrow" aria-hidden="true"></span>
+          </span>
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="Game controls">
+        <div
+          class="mission-progress"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          id="progress-root"
+        >
+          <span>Progress</span>
+          <span id="progress-value">0%</span>
+          <div class="progress-track">
+            <div class="progress-indicator" id="progress-indicator"></div>
+          </div>
+        </div>
+
+        <div class="mission-card">
+          <p class="small-label" id="start-cue">Start near the bus stop.</p>
+          <h2 id="mission-title">Go to the Library</h2>
+          <p class="message message-ready" role="status" aria-live="polite" id="message">
+            Tap the best way to go.
+          </p>
+        </div>
+
+        <div class="compass-box" aria-label="Compass rose">
+          <span class="compass-letter compass-n">N</span>
+          <span class="compass-letter compass-e">E</span>
+          <span class="compass-letter compass-s">S</span>
+          <span class="compass-letter compass-w">W</span>
+          <span class="icon-compass" aria-hidden="true"></span>
+        </div>
+
+        <div class="direction-grid" id="direction-grid" aria-label="Choose a direction">
+          <button class="direction-button" type="button" data-action="straight">
+            <span class="icon-arrow-up" aria-hidden="true"></span>
+            <span>Go straight</span>
+          </button>
+          <button class="direction-button" type="button" data-action="left">
+            <span class="icon-corner-left" aria-hidden="true"></span>
+            <span>Turn left</span>
+          </button>
+          <button class="direction-button" type="button" data-action="right">
+            <span class="icon-corner-right" aria-hidden="true"></span>
+            <span>Turn right</span>
+          </button>
+          <button class="direction-button" type="button" data-action="back">
+            <span class="icon-back" aria-hidden="true"></span>
+            <span>Go back</span>
+          </button>
+        </div>
+
+        <button class="next-button hidden" type="button" id="next-button">
+          <span class="icon-flag" aria-hidden="true"></span>
+          Next Destination
+        </button>
+      </aside>
+
+      <section class="celebration-screen hidden" aria-live="polite" id="celebration">
+        <div id="confetti-layer"></div>
+        <div class="celebration-panel">
+          <span class="icon-sparkles" aria-hidden="true"></span>
+          <p class="eyebrow">All done</p>
+          <h2>Great map work!</h2>
+          <p>You found all 5 places.</p>
+          <button class="next-button replay-button" type="button" id="replay-button">
+            Play Again
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
