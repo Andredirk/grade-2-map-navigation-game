@@ -22,3 +22,14 @@ Use these settings if Render asks for them manually:
 - Publish Directory: `.`
 
 This repository also includes `render.yaml`, so Render can use it as a Blueprint.
+
+## Push to GitHub
+
+If this project is still only on your computer, run:
+
+```bash
+gh auth login
+gh repo create grade-2-map-navigation-game --private --source=. --remote=origin --push
+```
+
+You can change `--private` to `--public` if you want the repository to be visible to everyone.
